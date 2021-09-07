@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout"
+    tools:context=".ui.auth.SignInActivity">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.smi.test.ui.auth.SignInViewModel" />
+    </data>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white_basic"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_global_40dp"
+            android:layout_marginEnd="@dimen/margin_global_40dp"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textSigninTitle"
+                style="@style/TextView.GlobalBlack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/margin_global_50dp"
+                android:gravity="center"
+                android:text="@string/signin_alredy_signin" />
+
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/editSigninEmail"
+                style="@style/EditText.GlobalTextForm"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_global_edit"
+                android:layout_marginTop="@dimen/margin_global_30dp"
+                android:enabled="@{!safeUnbox(viewModel.signingIn)}"
+                android:hint="@string/signin_mail"
+                android:inputType="textEmailAddress"
+                android:text="@={viewModel.email}" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/editSigninPassword"
+                style="@style/EditText.GlobalTextForm"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_global_edit"
+                android:layout_marginTop="@dimen/margin_global_20dp"
+                android:enabled="@{!safeUnbox(viewModel.signingIn)}"
+                android:hint="@string/signin_password"
+                android:inputType="textPassword"
+                android:text="@={viewModel.password}" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_global_30dp"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatCheckBox
+                    android:id="@+id/checkSigninDisplayMDP"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/margin_global_20dp"
+                    android:button="@drawable/check_selector_green"
+                    android:checked="@={viewModel.showPassword}"
+                    android:textSize="@dimen/font_13sp" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/textSigninDisplayMDP"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="start"
+                    android:padding="@dimen/padding_global_5dp"
+                    android:text="@string/signin_display_mdp"
+                    android:textSize="@dimen/font_11sp"
+                    app:onClickWithDebounce="@{() ->viewModel.onShowPasswordClicked(!viewModel.showPassword)}" />
+
+            </LinearLayout>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_global_30dp">
+
+                <com.smi.test.ui.view.CustomButton
+                    android:id="@+id/buttonSigninConnexion"
+                    style="@style/Button.GlobalGreen"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:text="@string/signin_submit"
+                    android:visibility="@{safeUnbox(viewModel.signingIn) ? View.GONE : View.VISIBLE}"
+                    app:onClickWithDebounce="@{() ->viewModel.onSignInClicked()}" />
+
+                <com.smi.test.global.view.CustomProgressBar
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_gravity="center_horizontal"
+                    android:visibility="@{safeUnbox(viewModel.signingIn) ? View.VISIBLE : View.GONE}" />
+
+
+            </RelativeLayout>
+
+
+            <com.smi.test.ui.view.CustomButton
+                android:id="@+id/buttonSigninSignup"
+                style="@style/Button.SignInAccount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_global_20dp"
+                android:enabled="@{!safeUnbox(viewModel.signingIn)}"
+                android:text="@string/signin_are_u_sign_in"
+                app:onClickWithDebounce="@{() ->viewModel.onSignUpClicked()}" />
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    </LinearLayout>
+
+</layout>

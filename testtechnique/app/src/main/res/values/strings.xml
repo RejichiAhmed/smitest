@@ -1,0 +1,49 @@
+<resources>
+    <string name="app_name">test technique</string>
+
+    <!--global message-->
+    <string name="global_ok">Ok</string>
+    <string name="global_cancel">Annuler</string>
+
+    <!--global error-->
+    <string name="global_error_server">Une erreur est survenue. Merci de réessayer plus tard.</string>
+    <string name="global_error_unavailable_network">Merci de vérifier votre connexion.</string>
+    <string name="global_error_invalid_email_format">Veuillez saisir une adresse e-mail valide.</string>
+    <string name="global_error_connection">Merci de vérifier votre connexion.</string>
+    <string name="global_error_empty">Veuillez remplir tous les champs.</string>
+    <string name="global_error_password_length">Veuillez saisir un mot de passe qui contient au moins 6 caractères.</string>
+    <string name="global_error_first_length">Veuillez saisir un prénom qui contient au maximum 25 caractères.</string>
+    <string name="global_error_last_length">Veuillez saisir un nom qui contient au maximum 25 caractères.</string>
+    <string name="global_error_password_length_max">Veuillez saisir un mot de passe qui contient au maximum 25 caractères.</string>
+    <string name="global_error_mail_length_max">Veuillez saisir un e-mail qui contient au maximum 50 caractères.</string>
+    <string name="global_error_banned_user">Votre compte a été bloqué.</string>
+    <string name="global_error_retry_message">ERROR !! Tap to retry.</string>
+    <string name="global_empty_list">No data.</string>
+    <string name="global_error_refresh_fail">Refresh failed</string>
+
+    <!-- SIGNIN -->
+    <string name="signin_are_u_sign_in">Vous n’êtes pas encore inscrit ?</string>
+    <string name="signin_alredy_signin">Déjà inscrit ?</string>
+    <string name="signin_mail">E-mail</string>
+    <string name="signin_password">Mot de passe</string>
+    <string name="signin_forgotten_pass">Mot de passe oublié</string>
+    <string name="signin_submit">Valider</string>
+    <string name="signin_display_mdp">Afficher le mot de passe.</string>
+    <string name="signin_description_title">Inscrivez-vous</string>
+    <string name="signin_invalid_data">E-mail ou mot de passe incorrect</string>
+
+
+
+    <!-- signup -->
+    <string name="signup_not_sign_up">Pas encore de compte ?</string>
+    <string name="signup_already">Vous avez déjà un compte ?</string>
+    <string name="signup_lastname">Nom*</string>
+    <string name="signup_firstname">Prénom*</string>
+    <string name="signup_password">Mot de passe*</string>
+    <string name="signup_mail">E-mail*</string>
+    <string name="signup_error_unique_mail">Un compte existe déjà avec cette adresse e-mail.</string>
+    <string name="signup_error_not_found">Compte introuvable.</string>
+
+
+
+</resources>

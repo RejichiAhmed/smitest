@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/layout">
+
+    <data>
+
+        <variable
+                name="brand"
+                type="com.smi.test.data.model.Brands" />
+
+
+        <variable
+                name="imageUrl"
+                type="String" />
+
+
+        <variable
+                name="onItemClickedListener"
+                type="com.smi.test.global.listener.OnItemClickedListener" />
+
+
+        <variable
+                name="placeHolder"
+                type="android.graphics.drawable.Drawable" />
+
+        <variable
+                name="picasso"
+                type="com.squareup.picasso.Picasso" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_global_20dp"
+            app:onClickWithDebounce="@{()->onItemClickedListener.onItemClicked(brand)}">
+
+        <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imageItemNewsPicture"
+                android:layout_width="@dimen/height_news_image"
+                android:layout_height="@dimen/height_news_image"
+                android:scaleType="centerCrop"
+                app:imageUrl="@{imageUrl}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:picasso="@{picasso}"
+                app:placeholder="@{placeHolder}"
+                tools:src="@mipmap/ic_launcher" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</layout>

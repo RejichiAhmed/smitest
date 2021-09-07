@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/layout"
+        tools:context=".ui.home.HomeActivity">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="placeHolder"
+            type="android.graphics.drawable.Drawable" />
+
+        <variable
+            name="picasso"
+            type="com.squareup.picasso.Picasso" />
+
+        <variable
+                name="viewModel"
+                type="com.smi.test.ui.brand.BrandViewModel" />
+    </data>
+
+
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imageItemBrandPicture"
+            android:layout_width="@dimen/dim_news_image"
+            android:layout_height="@dimen/dim_news_image"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="32dp"
+            android:scaleType="centerCrop"
+            app:imageUrl="@{viewModel.brands.pic}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:picasso="@{picasso}"
+            app:placeholder="@{placeHolder}"
+            tools:src="@mipmap/ic_launcher" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textBrandTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:text="@{viewModel.brands.displayName}"
+            android:textSize="@dimen/font_20sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/imageItemBrandPicture"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textBrandDesc"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="8dp"
+            android:text="@{viewModel.brands.description}"
+            android:textSize="@dimen/font_16sp"
+            app:layout_constraintBottom_toTopOf="@+id/textBrandCommission"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/imageItemBrandPicture"
+            app:layout_constraintTop_toBottomOf="@+id/textBrandTitle"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textBrandCommission"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_global_16dp"
+            android:layout_marginTop="80dp"
+            android:layout_marginEnd="@dimen/margin_global_16dp"
+            android:background="@color/gray_cloud"
+            android:padding="@dimen/padding_global_20dp"
+            android:text="@{viewModel.commission+viewModel.purchase.commission.toString()}"
+            android:textAlignment="center"
+            android:textSize="@dimen/font_20sp"
+            android:visibility="@{safeUnbox(viewModel.isLoading) ? View.GONE : View.VISIBLE}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageItemBrandPicture" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textBrandAmount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_global_16dp"
+            android:layout_marginTop="@dimen/margin_global_32dp"
+            android:layout_marginEnd="@dimen/margin_global_16dp"
+            android:padding="@dimen/padding_global_20dp"
+            android:text="@{viewModel.amount +viewModel.purchase.amount.toString() + viewModel.purchase.currency}"
+            android:visibility="@{safeUnbox(viewModel.isLoading) ? View.GONE : View.VISIBLE}"
+            android:textSize="@dimen/font_20sp"
+            android:textAlignment="center"
+            android:background="@color/gray_cloud"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textBrandCommission" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textBrandCount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_global_16dp"
+            android:layout_marginTop="@dimen/margin_global_32dp"
+            android:layout_marginEnd="@dimen/margin_global_16dp"
+            android:padding="@dimen/padding_global_20dp"
+            android:background="@color/gray_cloud"
+            android:textAlignment="center"
+            android:text="@{viewModel.count+viewModel.purchase.count.toString()}"
+            android:visibility="@{safeUnbox(viewModel.isLoading) ? View.GONE : View.VISIBLE}"
+            android:textSize="@dimen/font_20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textBrandAmount" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,0 +1,174 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'com.google.gms.google-services'
+}
+
+ext {
+    // Application version
+    VERSION_CODE          = 1
+    VERSION_NAME          = '1.0.0'
+
+    MIN_SDK_VERSION = 21
+    TARGET_SDK_VERSION = 29
+
+
+    support_library_version = '1.1.0'
+    google_play_services_library_version = '11.4.2'
+    core_ktx = '1.2.0-alpha01'
+    constraintlayout = '2.0.1'
+
+    material='1.3.0-alpha02'
+    picasso_version = '2.71828'
+    dagger_version = '2.16'
+    retrofit_version = '2.6.2'
+    navigation = '2.3.0'
+    swiperefreshlayout = '1.1.0'
+    leakcanary_version = '1.6.2'
+    lifecycle_livedata_ktx = '2.2.0'
+    lifecycle_viewmodel_ktx = '2.0.0'
+    fragment_ktx = '1.2.5'
+    multi_dex = '1.0.3'
+    okhttp3_logging = '4.2.1'
+    databinding = '3.1.4'
+    paging_version = '2.1.2'
+    secure_preferences = '0.1.4'
+    retrofit_moshi='2.6.2'
+    kotlin_moshi='1.8.0'
+    coroutines='1.2.0'
+    transition="1.2.0"
+
+}
+
+
+
+android {
+
+    packagingOptions {
+        exclude 'META-INF/proguard/coroutines.pro'
+    }
+
+    buildFeatures {
+        dataBinding true
+    }
+
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
+    }
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+    kapt { generateStubs = true }
+    compileSdkVersion 30
+    defaultConfig {
+        applicationId "com.smi.test"
+        minSdkVersion MIN_SDK_VERSION
+        targetSdkVersion TARGET_SDK_VERSION
+        versionCode VERSION_CODE
+        versionName VERSION_NAME
+        multiDexEnabled true
+
+    }
+    lintOptions {
+        abortOnError false
+    }
+
+}
+
+
+
+
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    //multidex
+    implementation "com.android.support:multidex:$multi_dex"
+
+    //required dependency
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
+
+    //Android x
+    implementation "androidx.core:core-ktx:$core_ktx"
+    implementation "androidx.constraintlayout:constraintlayout:$constraintlayout"
+    implementation "androidx.appcompat:appcompat:$support_library_version"
+    implementation "com.google.android.material:material:$material"
+
+    //Coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines"
+
+    //Paging
+    implementation "androidx.paging:paging-runtime:$paging_version"
+    implementation 'com.google.firebase:firebase-auth:19.2.0'
+    implementation 'com.google.firebase:firebase-database:20.0.1'
+    // alternatively - without Android dependencies for testing
+    testImplementation "androidx.paging:paging-common:$paging_version"
+
+
+    // Dagger core
+    implementation "com.google.dagger:dagger:$dagger_version"
+    implementation "com.google.dagger:dagger-android-support:$dagger_version"
+    implementation "com.google.dagger:dagger-android:$dagger_version"
+
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okhttp3_logging"
+    implementation "com.squareup.picasso:picasso:$picasso_version"
+
+
+    implementation "com.squareup.retrofit2:converter-moshi:$retrofit_moshi"
+    implementation "com.squareup.moshi:moshi:$kotlin_moshi"
+    implementation "com.squareup.moshi:moshi-kotlin:$kotlin_moshi"
+
+    debugImplementation "com.squareup.leakcanary:leakcanary-android:$leakcanary_version"
+    releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$leakcanary_version"
+
+    // ViewModel and LiveData
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_livedata_ktx"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_viewmodel_ktx"
+    implementation "androidx.fragment:fragment-ktx:$fragment_ktx"
+
+
+    //jetpack
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:$swiperefreshlayout"
+
+
+    //secure-preferences
+    implementation "com.scottyab:secure-preferences-lib:$secure_preferences"
+
+
+    kapt "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_livedata_ktx"
+    kapt "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_viewmodel_ktx"
+    kapt "com.google.dagger:dagger-compiler:$dagger_version"
+    kapt "com.google.dagger:dagger-android-processor:$dagger_version"
+    kapt "com.squareup.moshi:moshi-kotlin-codegen:$kotlin_moshi"
+}
+
+
+configurations.all {
+    resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+        def requested = details.requested
+
+        if (requested.group == 'androidx.transition') {
+            details.useVersion transition
+        }
+
+        if (requested.group == 'com.android.support') {
+            if (!requested.name.startsWith("multidex")) {
+                details.useVersion support_library_version
+            }
+        }
+
+        if (requested.group == 'com.google.android.gms') {
+            details.useVersion google_play_services_library_version
+        }
+
+        if (requested.group == 'com.google.firebase') {
+            details.useVersion google_play_services_library_version
+        }
+
+    }
+}
